@@ -1,5 +1,5 @@
 import { Controller, Post, Req, Res, HttpStatus } from "@nestjs/common";
-import { Request, Response } from "express";
+import { UserLoginRequest, UserCreateRequest, HttpRequest, HttpResponse } from "src/presentation/usecases";
 import { UserService } from "src/domain/services/user.service";
 import { BCrypt } from "src/presentation/middlewares/bcrypt";
 
@@ -8,8 +8,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post("/users")
-  async create(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    const { username, email, password, realm } = req.body
+  async create(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
+    const { username, email, password, realm } = req.body as UserCreateRequest;
 
     try {
       const passwordHash = await BCrypt.createPasswordHash(password);
@@ -27,8 +27,8 @@ export class UserController {
   }
 
   @Post("/login")
-  async login(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    const { email, password } = req.body;
+  async login(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
+    const { email, password } = req.body as UserLoginRequest;
 
     try {
       const user = await this.userService.getUserByEmail({ email, password });

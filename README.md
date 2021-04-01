@@ -19,7 +19,7 @@
   Executa esse comando no terminal: npm run start
 
 
-==========================================================================
+================================ Helps abaixo (ignore) ================================
 ::Create Migrations::
 npx typeorm migration:create -n create-notes
 

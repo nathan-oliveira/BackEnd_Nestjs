@@ -4,15 +4,11 @@ import { validate } from "class-validator";
 
 import { NoteDAO } from "src/domain/models"
 import { NoteRepository } from "src/data/repositories"
-
-interface dataFormUpdate {
-  title: string;
-  content: string;
-}
+import { NoteDataService } from "src/presentation/usecases";
 
 @Injectable()
 export class NoteService {
-  async createNote(dataForm: object): Promise<object> {
+  async createNote(dataForm: NoteDataService): Promise<object> {
     const noteDAO = NoteDAO.create(dataForm);
     const errors = await validate(noteDAO);
 
@@ -31,7 +27,7 @@ export class NoteService {
     return item;
   }
 
-  async update(userId: number, id: number, dataForm: dataFormUpdate): Promise<object> {
+  async update(userId: number, id: number, dataForm: NoteDataService): Promise<object> {
     await this.getById(userId, id);
     await getCustomRepository(NoteRepository).updated(userId, id, dataForm)
 

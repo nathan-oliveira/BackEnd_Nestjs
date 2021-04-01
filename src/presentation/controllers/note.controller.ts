@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Req, Res, UseGuards, HttpStatus } from "@nestjs/common";
-import { HttpRequest, HttpResponse } from "src/presentation/usecases";
+import { HttpRequest, HttpResponse, NoteCreateRequest } from "src/presentation/usecases";
 import { NoteService } from "src/domain/services/note.service"
 import { RolesGuard } from "src/domain/roles/roles.guard"
+
 
 @Controller()
 export class NoteController {
@@ -11,13 +12,13 @@ export class NoteController {
   @Post("/notes")
   async create(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { userId } = (req as unknown) as { userId: number };
-    const dataForm = { ...req.body, userId };
+    const dataForm = { ...req.body, userId } as NoteCreateRequest;
 
     try {
       const result = await this.noteService.createNote(dataForm);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 
@@ -40,7 +41,7 @@ export class NoteController {
       const result = await this.noteService.getById(userId, id);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 
@@ -54,7 +55,7 @@ export class NoteController {
       const result = await this.noteService.update(userId, id, req.body);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 
@@ -68,7 +69,7 @@ export class NoteController {
       const result = await this.noteService.delete(userId, id);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 }

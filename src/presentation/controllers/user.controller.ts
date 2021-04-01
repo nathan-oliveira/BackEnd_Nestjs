@@ -1,10 +1,11 @@
 import { Controller, Post, Req, Res, HttpStatus } from "@nestjs/common";
+import { IUser } from "src/common/usecases"
 import { UserLoginRequest, UserCreateRequest, HttpRequest, HttpResponse } from "src/presentation/usecases";
 import { UserService } from "src/domain/services/user.service";
 import { BCrypt } from "src/presentation/middlewares/bcrypt";
 
 @Controller()
-export class UserController {
+export class UserController implements IUser {
   constructor(private readonly userService: UserService) {}
 
   @Post("/users")
@@ -22,7 +23,7 @@ export class UserController {
 
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 
@@ -36,7 +37,7 @@ export class UserController {
 
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json(err);
+      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
     }
   }
 }

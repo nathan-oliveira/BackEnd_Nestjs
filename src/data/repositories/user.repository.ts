@@ -1,9 +1,10 @@
 import { EntityRepository, Repository } from "typeorm";
 import { UserDAO } from "src/domain/models"
+import { UserCreateRequest } from "src/presentation/usecases";
 
 @EntityRepository(UserDAO)
 class UserRepository extends Repository<UserDAO> {
-  async createUser(dataForm: any): Promise<object> {
+  async createUser(dataForm: UserCreateRequest): Promise<object> {
     const result = await this.getUserByEmail(dataForm.email)
 
     if (result.length === 0) {

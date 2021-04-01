@@ -1,9 +1,10 @@
 import { EntityRepository, Repository } from "typeorm"
 import { NoteDAO } from "src/domain/models"
+import { NoteDataService } from "src/presentation/usecases";
 
 @EntityRepository(NoteDAO)
 class NoteRepository extends Repository<NoteDAO> {
-  async createNote(dataForm: any): Promise<object> {
+  async createNote(dataForm: NoteDataService): Promise<object> {
     try {
       return await this.manager.save(NoteDAO, dataForm);
     } catch (err) {
@@ -20,7 +21,11 @@ class NoteRepository extends Repository<NoteDAO> {
   }
 
   async updated(userId: number, id: number, dataForm: object): Promise<object> {
-    return await this.manager.update(NoteDAO, { id, userId }, dataForm);
+    try {
+      return await this.manager.update(NoteDAO, { id, userId }, dataForm);
+    } catch (err) {
+      throw new Error("Não foi possível atualizar o cadastro!");
+    }
   }
 
   async deleted(userId: number, id: number): Promise<object> {

@@ -7,12 +7,12 @@ import { UserRepository } from "../../data/repositories"
 
 @Injectable()
 export class UserService {
-  async createUser(dataForm: any): Promise<any> {
+  async createUser(dataForm: any): Promise<object> {
     const userDAO = UserDAO.create(dataForm);
     const errors = await validate(userDAO);
 
     if (errors.length > 0) throw new Error("Todos os campos deve conter no mínimo 6 caracteres!");
-    return getCustomRepository(UserRepository).createUser(userDAO)
+    return await getCustomRepository(UserRepository).createUser(userDAO)
   }
 
   async getUserByEmail(dataForm: any): Promise<UserDAO[]> {

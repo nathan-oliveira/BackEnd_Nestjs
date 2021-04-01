@@ -21,11 +21,11 @@ export class UserController {
         realm
       })
 
-      const payload = HttpResult.ok(result)
-      return res.status(payload.statusCode).json(payload.body);
+      const { statusCode, body } = HttpResult.ok(result)
+      return res.status(statusCode).json(body);
     } catch (err) {
-      const payload = HttpResult.badRequest(err);
-      return res.status(payload.statusCode).json(payload.body);
+      const { statusCode, body } = HttpResult.badRequest(err);
+      return res.status(statusCode).json(body);
     }
   }
 
@@ -36,12 +36,12 @@ export class UserController {
     try {
       const user = await this.userService.getUserByEmail({ email, password });
       const result = await BCrypt.comparePasswordHash(password, user[0]);
-      const payload = HttpResult.ok(result);
 
-      return res.status(payload.statusCode).json(payload.body);
+      const { statusCode, body } = HttpResult.ok(result);
+      return res.status(statusCode).json(body);
     } catch (err) {
-      const payload = HttpResult.badRequest(err);
-      return res.status(payload.statusCode).json(payload.body);
+      const { statusCode, body } = HttpResult.badRequest(err);
+      return res.status(statusCode).json(body);
     }
   }
 }

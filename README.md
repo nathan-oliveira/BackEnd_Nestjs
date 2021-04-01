@@ -20,6 +20,7 @@
 
 
 ================================ Helps abaixo (ignore) ================================
+
 ::Create Migrations::
 npx typeorm migration:create -n create-notes
 

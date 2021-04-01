@@ -10,8 +10,8 @@ export class AppController {
   @Get()
   async getHello(@Req() req: Request, @Res() res: Response): Promise<Response> {
     const dataForm = await this.appService.getHello();
+    const payload = HttpResult.ok(dataForm);
 
-    const result = HttpResult.ok(dataForm);
-    return res.status(result.statusCode).json(result.body);
+    return res.status(payload.statusCode).json(payload.body);
   }
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import { getCustomRepository } from "typeorm"
-import { validate } from 'class-validator';
+import { validate } from "class-validator";
 
 import { UserDAO } from "../models"
 import { UserRepository } from "../../data/repositories"

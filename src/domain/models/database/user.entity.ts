@@ -15,7 +15,7 @@ class UserDAO extends BaseEntity {
   public id: number;
 
   @Column()
-  @Length(6, 220, { message: "Campo 'username' deve conter no mínimo 6 á 200 caracteres!" })
+  @Length(6, 255, { message: "Campo 'Nome' deve conter no mínimo 6 á 200 caracteres!" })
   public username: string;
 
   @Column({ unique: true })
@@ -23,11 +23,11 @@ class UserDAO extends BaseEntity {
   public email: string;
 
   @Column()
-  @Length(6, 220, { message: "Campo 'Senha' deve conter no mínimo 6 á 200 caracteres!" })
+  @Length(6, 255, { message: "Campo 'Senha' deve conter no mínimo 6 á 200 caracteres!" })
   public password: string;
 
   @Column()
-  @Length(6, 220, { message: "Campo 'realm' deve conter no mínimo 6 á 200 caracteres!" })
+  @Length(6, 255, { message: "Campo 'realm' deve conter no mínimo 6 á 200 caracteres!" })
   public realm: string;
 
   @Column({ default: false })

@@ -20,11 +20,13 @@ export class createNotes1617150154479 implements MigrationInterface {
       {
         name: "title",
         type: "varchar",
+        length: '255',
         isNullable: false,
       },
       {
         name: "content",
         type: "varchar",
+        length: '255',
         isUnique: true,
       },
       {

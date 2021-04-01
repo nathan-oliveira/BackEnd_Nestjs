@@ -1,7 +1,6 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Req, Res, HttpStatus } from '@nestjs/common';
 import { Request, Response } from "express";
 import { AppService } from 'src/domain/services/app.service';
-import { HttpResult } from 'src/common/helpers/http-result';
 
 @Controller()
 export class AppController {
@@ -10,8 +9,7 @@ export class AppController {
   @Get()
   async getHello(@Req() req: Request, @Res() res: Response): Promise<Response> {
     const dataForm = await this.appService.getHello();
-    const { statusCode, body } = HttpResult.ok(dataForm);
 
-    return res.status(statusCode).json(body);
+    return res.status(HttpStatus.OK).json(dataForm);
   }
 }

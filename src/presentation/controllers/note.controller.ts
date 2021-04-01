@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Req, Res, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Req, Res, UseGuards, HttpStatus } from "@nestjs/common";
 import { Request, Response } from "express";
 import { NoteService } from "src/domain/services/note.service"
 import { RolesGuard } from "src/domain/roles/roles.guard"
-import { HttpResult } from "src/common/helpers/http-result";
 
 @Controller()
 export class NoteController {
@@ -16,12 +15,9 @@ export class NoteController {
 
     try {
       const result = await this.noteService.createNote(dataForm);
-      const { statusCode, body } = HttpResult.ok(result)
-
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 
@@ -31,8 +27,7 @@ export class NoteController {
     const { userId } = (req as unknown) as { userId: number };
     const result = await this.noteService.getAll(userId);
 
-    const { statusCode, body } = HttpResult.ok(result)
-    return res.status(statusCode).json(body);
+    return res.status(HttpStatus.OK).json(result);
   }
 
   @UseGuards(RolesGuard)
@@ -43,12 +38,9 @@ export class NoteController {
 
     try {
       const result = await this.noteService.getById(userId, id);
-      const { statusCode, body } = HttpResult.ok(result);
-
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 
@@ -60,12 +52,9 @@ export class NoteController {
 
     try {
       const result = await this.noteService.update(userId, id, req.body);
-      const { statusCode, body } = HttpResult.ok(result);
-
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 
@@ -77,12 +66,9 @@ export class NoteController {
 
     try {
       const result = await this.noteService.delete(userId, id);
-      const { statusCode, body } = HttpResult.ok(result);
-
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 }

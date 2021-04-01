@@ -1,7 +1,6 @@
-import { Controller, Post, Req, Res } from "@nestjs/common";
+import { Controller, Post, Req, Res, HttpStatus } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "src/domain/services/user.service";
-import { HttpResult } from "src/common/helpers/http-result";
 import { BCrypt } from "src/presentation/middlewares/bcrypt";
 
 @Controller()
@@ -21,11 +20,9 @@ export class UserController {
         realm
       })
 
-      const { statusCode, body } = HttpResult.ok(result)
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 
@@ -37,11 +34,9 @@ export class UserController {
       const user = await this.userService.getUserByEmail({ email, password });
       const result = await BCrypt.comparePasswordHash(password, user[0]);
 
-      const { statusCode, body } = HttpResult.ok(result);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      const { statusCode, body } = HttpResult.badRequest(err);
-      return res.status(statusCode).json(body);
+      return res.status(HttpStatus.BAD_REQUEST).json(err);
     }
   }
 }

@@ -24,20 +24,4 @@ export class JwT {
       token
     }
   }
-
-  static async checkToken(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const authHeader = req.headers.authorization;
-
-    try {
-      if (!authHeader) throw new Error("Token indefinido!");
-
-      const [, token] = authHeader.split(" ");
-      const payload = (await jwt.verify(token, process.env.APP_SECRET || "secret")) as IJwTPayload;
-      (<any>req).userId = payload.id
-      return next();
-    } catch (err) {
-      const payload = HttpResult.badRequest(err);
-      return res.status(payload.statusCode).json(payload.body);
-    }
-  }
 }

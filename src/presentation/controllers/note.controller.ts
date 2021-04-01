@@ -1,11 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Req, Res, UseGuards } from "@nestjs/common";
 import { Request, Response } from "express";
-import { NoteService } from "../../domain/services/note.service"
-import { RolesGuard } from "../../domain/roles/roles.guard"
+import { NoteService } from "src/domain/services/note.service"
+import { RolesGuard } from "src/domain/roles/roles.guard"
 import { HttpResult } from "src/common/helpers/http-result";
-
-//"title": "string",
-//"content": "string",
 
 @Controller()
 export class NoteController {

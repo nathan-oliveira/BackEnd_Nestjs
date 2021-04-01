@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from "typeorm";
-import { UserDAO } from "../../domain/models"
+import { UserDAO } from "src/domain/models"
 
 @EntityRepository(UserDAO)
 class UserRepository extends Repository<UserDAO> {

@@ -1,8 +1,8 @@
 import { Controller, Post, Req, Res } from "@nestjs/common";
 import { Request, Response } from "express";
-import { UserService } from "../../domain/services/user.service";
-import { HttpResult } from "../../common/helpers/http-result";
-import { BCrypt } from "../middlewares/bcrypt";
+import { UserService } from "src/domain/services/user.service";
+import { HttpResult } from "src/common/helpers/http-result";
+import { BCrypt } from "src/presentation/middlewares/bcrypt";
 
 @Controller()
 export class UserController {

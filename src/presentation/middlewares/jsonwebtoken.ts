@@ -1,6 +1,4 @@
 import * as jwt from "jsonwebtoken"
-import { Request, Response, NextFunction } from "express"
-import { HttpResult } from "../../common/helpers/http-result"
 
 export type IJwTPayload = {
   id: number;
@@ -14,7 +12,7 @@ export class JwT {
 
     const token = await jwt.sign({ id }, process.env.APP_SECRET || "secret", {
       expiresIn: "1d"
-    })
+    });
 
     return {
       username,

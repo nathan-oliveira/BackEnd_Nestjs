@@ -1,4 +1,4 @@
-import server from "./data/infrastructure/config/server"
+import server from "src/data/infrastructure/config/server"
 
 async function createServer() {
   await server.createServer();

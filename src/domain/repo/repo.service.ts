@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from "@nestjs/common";
+import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 
-import User from '../models/database/user.entity';
-import Note from '../models/database/notes.entity';
+import User from "src/domain/models/database/user.entity";
+import Note from "src/domain/models/database/notes.entity";
 
 @Injectable()
 class RepoService {

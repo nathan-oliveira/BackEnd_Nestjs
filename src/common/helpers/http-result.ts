@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../../common/errors/http-status-code";
+import { HttpStatusCode } from "src/common/https/http-status-code";
 
 export class HttpResult {
   static ok(body: any) {

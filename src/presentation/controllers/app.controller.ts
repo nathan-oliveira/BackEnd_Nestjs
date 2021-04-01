@@ -1,7 +1,7 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Request, Response } from "express";
-import { AppService } from '../../domain/services/app.service';
-import { HttpResult } from '../../common/helpers/http-result';
+import { AppService } from 'src/domain/services/app.service';
+import { HttpResult } from 'src/common/helpers/http-result';
 
 @Controller()
 export class AppController {

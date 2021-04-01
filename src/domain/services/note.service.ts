@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { getCustomRepository } from "typeorm";
 import { validate } from "class-validator";
 
-import { NoteDAO } from "../models"
-import { NoteRepository } from "../../data/repositories"
+import { NoteDAO } from "src/domain/models"
+import { NoteRepository } from "src/data/repositories"
 
 interface dataFormUpdate {
   title: string;

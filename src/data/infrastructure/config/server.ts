@@ -1,9 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import { NestFactory } from "@nestjs/core";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import * as bp from "body-parser";
 import * as compression from "compression";
-
-import { AppModule } from '../../../domain/repo/app.module';
+import { AppModule } from "src/domain/repo/app.module";
 
 class Server {
   public app: NestExpressApplication;

@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { getCustomRepository } from "typeorm"
 import { validate } from "class-validator";
 
-import { UserDAO } from "../models"
-import { UserRepository } from "../../data/repositories"
+import { UserDAO } from "src/domain/models"
+import { UserRepository } from "src/data/repositories"
 
 @Injectable()
 export class UserService {

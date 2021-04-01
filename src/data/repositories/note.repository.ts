@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from "typeorm"
-import { NoteDAO } from "../../domain/models"
+import { NoteDAO } from "src/domain/models"
 
 @EntityRepository(NoteDAO)
 class NoteRepository extends Repository<NoteDAO> {

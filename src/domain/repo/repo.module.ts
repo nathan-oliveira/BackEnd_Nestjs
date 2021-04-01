@@ -1,9 +1,9 @@
-import { Global, Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import RepoService from './repo.service';
+import { Global, Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import RepoService from "./repo.service";
 
-import User from '../models/database/user.entity';
-import Note from '../models/database/notes.entity';
+import User from "src/domain/models/database/user.entity";
+import Note from "src/domain/models/database/notes.entity";
 
 @Global()
 @Module({

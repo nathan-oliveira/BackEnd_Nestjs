@@ -18,7 +18,8 @@
 5º Inicie o Servidor:
   Executa esse comando no terminal: npm run start
 
-
+=======================================================================================
+Comando para rodar o jest(TDD): npm run test:e2e
 ================================ Helps abaixo (ignore) ================================
 
 ::Create Migrations::

@@ -1,26 +1,61 @@
+import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { AppController } from './../src/presentation/controllers/app.controller'
-import { AppService } from './../src/domain/services/app.service'
+import { AppModule } from 'src/domain/repo/app.module';
+import server from "src/data/infrastructure/config/server"
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeAll(async () => {
-    const moduleFixture = await Test.createTestingModule({
-      imports: [],
-      controllers: [AppController],
-      providers: [AppService],
-    }).compile();
+  beforeEach(async () => {
+    await server.createServer();
+    app = server.app;
+    // const moduleFixture: TestingModule = await Test.createTestingModule({
+    //   imports: [AppModule],
+    // }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    // app = moduleFixture.createNestApplication();
+    // await app.init();
   });
 
-  it('/ (GET)', () => {
+  afterEach(async () => {
+    return await app.close();
+  });
+
+  it('/ (GET)', (done) => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
+      .end(async (err: Error, res: request.Response) => {
+        done()
+      })
+
   });
+
+
+  it('/users (GET)', (done) => {
+    const dataJson = {
+      "username": "nathan_oliviera",
+      "email": "nathan_oliveiramendonca1999@hotmail.com",
+      "password": "123456789",
+      "realm": "realm realm realm"
+    }
+
+    return request(app.getHttpServer())
+      .post('/users')
+      .set('Accept', 'application/json')
+      .send(dataJson)
+      .end((err: Error, res: request.Response) => {
+        //expect(res.status).toBe(200)
+
+        //expect(res.body).toMatchObject(dataJson);
+        expect(res.body).toHaveProperty('id')
+        expect(res.body).toHaveProperty('username')
+        expect(res.body).toHaveProperty('email')
+        expect(res.body).toHaveProperty('realm')
+        expect(res.body).toHaveProperty('emailVerified')
+
+        done();
+      })
+  })
 });

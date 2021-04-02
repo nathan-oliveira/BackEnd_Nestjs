@@ -1,5 +1,7 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { UserDAO, NoteDAO } from "src/domain/models"
 
+//"./dist/domain/models/database/*.entity{.ts,.js}"
 const options: TypeOrmModuleOptions = {
   type: "mysql",
   host: "localhost",
@@ -7,9 +9,10 @@ const options: TypeOrmModuleOptions = {
   username: "root",
   password: "",
   database: "node_backend_acacia",
-  synchronize: true,
+  synchronize: false,
+  logging: false,
   entities: [
-    "./dist/domain/models/database/*.entity{.ts,.js}"
+    UserDAO, NoteDAO
   ],
   migrations: [
     "./dist/data/infrastructure/database/migrations/*{.ts,.js}"

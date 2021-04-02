@@ -1,7 +1,7 @@
 import server from "src/data/infrastructure/config/server"
 
-async function createServer() {
+async function bootstrap() {
   await server.createServer();
 }
 
-createServer();
+bootstrap();

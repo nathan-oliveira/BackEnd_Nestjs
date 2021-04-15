@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Put, Delete, Req, Res, UseGuards, HttpStatus } from "@nestjs/common";
+import { INote } from "src/common/usecases";
 import { HttpRequest, HttpResponse, NoteCreateRequest } from "src/presentation/usecases";
 import { NoteService } from "src/domain/services/note.service"
 import { RolesGuard } from "src/domain/roles/roles.guard"
 
-
 @Controller()
-export class NoteController {
+@UseGuards(RolesGuard)
+export class NoteController implements INote {
   constructor(private readonly noteService: NoteService) {}
 
-  @UseGuards(RolesGuard)
   @Post("/notes")
   async create(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { userId } = (req as unknown) as { userId: number };
@@ -22,7 +22,6 @@ export class NoteController {
     }
   }
 
-  @UseGuards(RolesGuard)
   @Get("/notes")
   async getAll(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { userId } = (req as unknown) as { userId: number };
@@ -31,7 +30,6 @@ export class NoteController {
     return res.status(HttpStatus.OK).json(result);
   }
 
-  @UseGuards(RolesGuard)
   @Get("/notes/:id")
   async getById(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { id } = (req.params as unknown) as { id: number };
@@ -45,7 +43,6 @@ export class NoteController {
     }
   }
 
-  @UseGuards(RolesGuard)
   @Put("/notes/:id")
   async update(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { id } = (req.params as unknown) as { id: number };
@@ -59,7 +56,6 @@ export class NoteController {
     }
   }
 
-  @UseGuards(RolesGuard)
   @Delete("/notes/:id")
   async delete(@Req() req: HttpRequest, @Res() res: HttpResponse): Promise<HttpResponse> {
     const { id } = (req.params as unknown) as { id: number };

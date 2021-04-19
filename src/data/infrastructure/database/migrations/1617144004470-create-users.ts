@@ -15,6 +15,7 @@ export class createUsers1617144004470 implements MigrationInterface {
         name: "username",
         type: "varchar",
         length: '255',
+        isNullable: false,
       },
       {
         name: "email",
@@ -58,7 +59,7 @@ export class createUsers1617144004470 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(this.table);
+    await queryRunner.dropTable(this.table);
   }
 
 }

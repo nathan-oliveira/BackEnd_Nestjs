@@ -23,6 +23,7 @@
 Comando para rodar o jest(TDD): npm run test:e2e
 
 ================================ Helps abaixo (ignore) ================================
+npx @nestjs/cli new
 
 ::Create Migrations::
 npx typeorm migration:create -n create-notes

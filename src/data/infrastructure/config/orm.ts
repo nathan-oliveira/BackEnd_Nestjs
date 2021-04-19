@@ -1,7 +1,6 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { UserDAO, NoteDAO } from "src/domain/models"
 
-//"./dist/domain/models/database/*.entity{.ts,.js}"
 const options: TypeOrmModuleOptions = {
   type: "mysql",
   host: "localhost",

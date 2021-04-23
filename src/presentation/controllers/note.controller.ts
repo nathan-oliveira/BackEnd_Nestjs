@@ -18,7 +18,7 @@ export class NoteController implements INote {
       const result = await this.noteService.createNote(dataForm);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return res.status(HttpStatus.FORBIDDEN).json({ error: err.message });
     }
   }
 
@@ -39,7 +39,7 @@ export class NoteController implements INote {
       const result = await this.noteService.getById(userId, id);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return res.status(HttpStatus.FORBIDDEN).json({ error: err.message });
     }
   }
 
@@ -52,7 +52,7 @@ export class NoteController implements INote {
       const result = await this.noteService.update(userId, id, req.body);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return res.status(HttpStatus.FORBIDDEN).json({ error: err.message });
     }
   }
 
@@ -65,7 +65,7 @@ export class NoteController implements INote {
       const result = await this.noteService.delete(userId, id);
       return res.status(HttpStatus.OK).json(result);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return res.status(HttpStatus.FORBIDDEN).json({ error: err.message });
     }
   }
 }
